@@ -1,0 +1,14 @@
+body {
+    background: darkcyan;
+}
+
+main div {
+    margin: 50px;
+    background-color: darkcyan;
+    color: black;
+    text-align: center;
+}
+
+.lead {
+    text-align: center;
+}

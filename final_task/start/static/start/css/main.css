@@ -1,0 +1,50 @@
+body {
+    background: darkcyan;
+}
+
+main div {
+    margin: 50px;
+    background-color: darkcyan;
+    color: black;
+    text-align: center;
+}
+
+.lead {
+    text-align: center;
+}
+
+/*.ico {*/
+/*    color: black;*/
+/*    font-size: 30px;*/
+/*    transition: all 0.2s linear;*/
+/*}*/
+
+/*.ico:hover {*/
+/*    background: #fff;*/
+/*    box-shadow: 0 0 30px 3px #ffffff;*/
+/*}*/
+
+/*main h1, main h2 {*/
+/*    color: black;*/
+/*    text-align: center;*/
+/*}*/
+
+/*main div {*/
+/*    margin-top: 20px;*/
+/*    width: 100px;*/
+/*    background-color: darkslategray;*/
+/*    justify-content: center;*/
+/*    display: flex;*/
+/*}*/
+
+/*div h1 {*/
+/*    color: black;*/
+/*    position: center;*/
+/*    text-align: center;*/
+/*}*/
+
+/*h1 {*/
+/*    color: black;*/
+/*    position: center;*/
+/*    text-align: center;*/
+/*}*/

@@ -2,14 +2,14 @@ from datetime import datetime
 
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from rest_framework.serializers import Serializer, IntegerField
+from rest_framework.serializers import Serializer, BooleanField, MultipleChoiceField
 
 from .models import Note, Comment
 
 
 class AuthorSerializer(serializers.ModelSerializer):
     """
-
+    Сериалайзер для Автора
     """
     class Meta:
         model = User
@@ -18,7 +18,7 @@ class AuthorSerializer(serializers.ModelSerializer):
 
 class OneNoteViewSerializer(serializers.ModelSerializer):
     """
-
+    Сериалайзер отображения отдельной заметки
     """
     class Meta:
         model = Note
@@ -37,7 +37,7 @@ class OneNoteViewSerializer(serializers.ModelSerializer):
 
 class NoteViewSerializer(serializers.ModelSerializer):
     """
-
+    Сериалайзер для отображения заметок и их автора
     """
     author = serializers.SlugRelatedField(slug_field='username', read_only=True)
 
@@ -49,7 +49,7 @@ class NoteViewSerializer(serializers.ModelSerializer):
 
 class NoteEditorSerializer(serializers.ModelSerializer):
     """
-
+    Отображение заметок при редактировании
     """
     author = AuthorSerializer(read_only=True)
 
@@ -59,10 +59,27 @@ class NoteEditorSerializer(serializers.ModelSerializer):
         read_only_fields = ['date_time', 'author', ]
 
 
+class QuerySerializer(Serializer):
+    """
+    Сериалайзер для проверки параметров запроса
+    """
+    status = [
+        (0, 'Активно'),
+        (1, 'Отложено'),
+        (2, 'Выполнено'),
+    ]
+
+    important = BooleanField(required=False)
+    status = MultipleChoiceField(status, required=False)
+    visiability = BooleanField(required=False)
+
+
 class CommentAddSerializer(serializers.ModelSerializer):
-    """ Добавление комментария """
+    """
+    ериалайзер для добавление комментария
+    """
     author = AuthorSerializer(read_only=True)
-    article = OneArticleViewSerializer(read_only=True)
+    article = OneNoteViewSerializer(read_only=True)
 
     class Meta:
         model = Comment
@@ -72,7 +89,7 @@ class CommentAddSerializer(serializers.ModelSerializer):
 
 class CommentViewSerializer(serializers.ModelSerializer):
     """
-
+    Сериалайзер комментария
     """
     class Meta:
         model = Comment

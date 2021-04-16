@@ -1,27 +1,31 @@
-from django.db import models
-from django.contrib.auth.models import User
 from datetime import datetime, timedelta
+
+from django.contrib.auth.models import User
+from django.db import models
 
 
 class Note(models.Model):
     """
-
+    Заметка
     """
-    STATUS = (
+    status = (
         (0, 'Активно'),
         (1, 'Отложено'),
         (2, 'Выполнено'),
     )
+    publication_day = datetime.now()+timedelta(days=1)
 
     title = models.CharField(max_length=250, null=False, verbose_name='Заголовок')
-    massage = models.TextField(verbose_name='Текст')
-    date_time = models.DateTimeField(default=datetime.now()+timedelta(days=1), verbose_name='Дата публикации')
-    public = models.BooleanField(verbose_name='Опубликовано')
-    status = models.IntegerField(default=0, choices=STATUS, verbose_name='Статус')
+    message = models.TextField(default='', blank=True, verbose_name='Текст')
+    date_time = models.DateTimeField(default=publication_day, blank=True, verbose_name='Дата публикации')
+    important = models.BooleanField(default=False, blank=True, verbose_name='Важно')
+    visiability = models.BooleanField(default=True, blank=True, verbose_name='Публичность')
+    public = models.BooleanField(verbose_name='Опубликовано', blank=True)
+    status = models.IntegerField(default=0, choices=status, blank=True, verbose_name='Статус')
     author = models.ForeignKey(User, related_name='author', on_delete=models.PROTECT, blank=True, verbose_name='Автор')
 
     def __str__(self):
-        return str(self.title)
+        return f'{self.get_status_display()}: {self.title}'
 
     class Meta:
         verbose_name = 'Заметки'
@@ -49,3 +53,7 @@ class Comment(models.Model):
 
     def __str__(self):
         return f'{self.get_rating_display()}: {self.message or "Без комментариев"}'
+
+    class Meta:
+        verbose_name = 'Комментарии'
+        verbose_name_plural = 'Комментарии'
