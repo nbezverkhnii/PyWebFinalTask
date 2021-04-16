@@ -1,0 +1,24 @@
+{% load static %}
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'start/css/about.css'%}">
+    <script src="https://kit.fontawesome.com/25c96bee27.js" crossorigin="anonymous"></script>
+    <title>About</title>
+</head>
+<body>
+    <main>
+        <div class="jumbotron">
+              <h1 class="display-4">About</h1>
+              <hr class="my-4">
+              <p class="lead">Пользователь: {{ user }}</p>
+              <p class="lead">Версия: {{ server_version }}</p>
+        </div>
+    </main>
+</body>
+</html>
