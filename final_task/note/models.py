@@ -20,7 +20,7 @@ class Note(models.Model):
     date_time = models.DateTimeField(default=publication_day, blank=True, verbose_name='Дата публикации')
     important = models.BooleanField(default=False, blank=True, verbose_name='Важно')
     visiability = models.BooleanField(default=True, blank=True, verbose_name='Публичность')
-    public = models.BooleanField(verbose_name='Опубликовано', blank=True)
+    public = models.BooleanField(default=True, verbose_name='Опубликовано', blank=True)
     status = models.IntegerField(default=0, choices=status, blank=True, verbose_name='Статус')
     author = models.ForeignKey(User, related_name='author', on_delete=models.PROTECT, blank=True, verbose_name='Автор')
 

@@ -3,6 +3,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from rest_framework.serializers import Serializer, BooleanField, MultipleChoiceField
+from rest_framework.exceptions import ValidationError
 
 from .models import Note, Comment
 
@@ -57,6 +58,14 @@ class NoteEditorSerializer(serializers.ModelSerializer):
         model = Note
         fields = "__all__"
         read_only_fields = ['date_time', 'author', ]
+
+    def validate_date_time(self, value):
+        """
+        Check that the blog post is about Django.
+        """
+        if datetime.strptime(value) < datetime.today():
+            raise ValidationError("Введена невалидная дата")
+        return value
 
 
 class QuerySerializer(Serializer):

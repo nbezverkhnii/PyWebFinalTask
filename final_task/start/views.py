@@ -1,6 +1,7 @@
 import os
 
 from django.shortcuts import render
+from django.conf import settings
 
 
 def index(request):
@@ -14,7 +15,7 @@ def about(request):
     :return:
     """
     data = {
-        'server_version': os.environ.get('MY_SERVER_VERSION', 'Don\' know'),
+        'server_version': settings.VERSION,
         'user': 'Anonymous' if request.user.is_anonymous else request.user.username,
     }
 

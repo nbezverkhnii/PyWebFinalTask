@@ -127,7 +127,7 @@ class CommentEditorView(APIView):
         """
         Энд-поинет для доавления комментариев к заметке с note_id
         """
-        note = Comment.objects.filter(pk=note_id).first()
+        note = Note.objects.filter(id=note_id).first()
         if not note:
             raise NotFound(f'Заметка с id={note_id} не найдена')
 
@@ -142,6 +142,6 @@ class CommentEditorView(APIView):
         """
         Энд-поинет для удаления комментариев к заметке с note_id
         """
-        comment = Note.objects.filter(pk=comment_id, author=request.user)
+        comment = Comment.objects.filter(pk=comment_id, author=request.user)
         comment.delete()
         return Response(status=st.HTTP_204_NO_CONTENT)
